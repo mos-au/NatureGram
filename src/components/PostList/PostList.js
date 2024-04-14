@@ -25,7 +25,7 @@ const PostList = () => {
     const response = await fetch(url);
     const newPosts = await response.json();
 
-    for (let i = 1; i < newPosts.length; i++) {
+    for (let i = 0; i < newPosts.length; i++) {
       if (!newPosts[i].imageUrl.startsWith("https")) {
         const res = await fetch(
           `http://localhost:5000/files/${newPosts[i].imageUrl}`
