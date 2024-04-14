@@ -1,0 +1,24 @@
+.posts-container {
+  width: 100%;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  max-width: 650px;
+  margin: auto;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+}
+
+.posts .load-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  background: transparent;
+  margin-top: 1rem;
+  border-top: 1px solid lightgray;
+  font-size: 1.5rem;
+}
