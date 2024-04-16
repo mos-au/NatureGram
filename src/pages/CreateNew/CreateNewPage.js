@@ -24,7 +24,7 @@ const CreateNewPage = () => {
 
     try {
       const res = await fetch(
-        "https://json-server-vercel-rust-nine.vercel.app/upload",
+        "https://json-server-vercel-rust-nine.vercel.app/api/upload",
         {
           method: "POST",
           body: formData,
@@ -42,7 +42,7 @@ const CreateNewPage = () => {
         likes: Math.floor(Math.random() * 9991),
       };
 
-      await fetch("https://json-server-vercel-rust-nine.vercel.app/posts", {
+      await fetch("https://json-server-vercel-rust-nine.vercel.app/api/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newPost),
