@@ -23,20 +23,19 @@ const CreateNewPage = () => {
     formData.append("image", file);
 
     try {
-      const res = await fetch(
-        "https://json-server-vercel-rust-nine.vercel.app/api/upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const image = await res.json();
+      // const res = await fetch(
+      //   "https://json-server-vercel-rust-nine.vercel.app/api/upload",
+      //   {
+      //     method: "POST",
+      //     body: formData,
+      //   }
+      // );
+      // const image = await res.json();
 
       const newPost = {
         profileName: author,
         title,
         description,
-        imageUrl: image.filename,
         profileImage: "https://avatars.githubusercontent.com/u/51633191",
         isLiked,
         likes: Math.floor(Math.random() * 9991),
