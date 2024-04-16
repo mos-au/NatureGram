@@ -16,7 +16,7 @@ const PostList = () => {
   }, [query]);
 
   const getPosts = async ({ reload = false, page = 1 }) => {
-    let url = `http://localhost:5000/posts?${
+    let url = `https://json-server-vercel-rust-nine.vercel.app//posts?${
       query ? `title_like=${query}&` : ""
     }_page=${page}&_limit=5`;
 
@@ -28,7 +28,7 @@ const PostList = () => {
     for (let i = 0; i < newPosts.length; i++) {
       if (!newPosts[i].imageUrl.startsWith("https")) {
         const res = await fetch(
-          `http://localhost:5000/files/${newPosts[i].imageUrl}`
+          `https://json-server-vercel-rust-nine.vercel.app//files/${newPosts[i].imageUrl}`
         );
         const data = await res.blob();
         newPosts[i].image = data;

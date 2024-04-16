@@ -23,10 +23,13 @@ const CreateNewPage = () => {
     formData.append("image", file);
 
     try {
-      const res = await fetch("http://localhost:5000/upload", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        "https://json-server-vercel-rust-nine.vercel.app//upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
       const image = await res.json();
 
       const newPost = {
@@ -39,7 +42,7 @@ const CreateNewPage = () => {
         likes: Math.floor(Math.random() * 9991),
       };
 
-      await fetch("http://localhost:5000/posts", {
+      await fetch("https://json-server-vercel-rust-nine.vercel.app/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newPost),
