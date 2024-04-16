@@ -16,7 +16,7 @@ const PostList = () => {
   }, [query]);
 
   const getPosts = async ({ reload = false, page = 1 }) => {
-    let url = `https://json-server-vercel-rust-nine.vercel.app//posts?${
+    let url = `https://json-server-vercel-rust-nine.vercel.app/posts?${
       query ? `title_like=${query}&` : ""
     }_page=${page}&_limit=5`;
 

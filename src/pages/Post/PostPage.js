@@ -13,13 +13,13 @@ const PostPage = () => {
   const getPost = async () => {
     const postIdParam = postId ?? "";
     const response = await fetch(
-      `https://json-server-vercel-rust-nine.vercel.app//posts/${postIdParam}`
+      `https://json-server-vercel-rust-nine.vercel.app/posts/${postIdParam}`
     );
     const post = await response.json();
 
     if (!post.imageUrl.startsWith("https")) {
       const res = await fetch(
-        `https://json-server-vercel-rust-nine.vercel.app//files/${post.imageUrl}`
+        `https://json-server-vercel-rust-nine.vercel.app/files/${post.imageUrl}`
       );
       const data = await res.blob();
       post.image = data;

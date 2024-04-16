@@ -24,7 +24,7 @@ const CreateNewPage = () => {
 
     try {
       const res = await fetch(
-        "https://json-server-vercel-rust-nine.vercel.app//upload",
+        "https://json-server-vercel-rust-nine.vercel.app/upload",
         {
           method: "POST",
           body: formData,
