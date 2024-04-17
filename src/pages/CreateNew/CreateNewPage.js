@@ -74,6 +74,8 @@ const CreateNewPage = () => {
     newPosts.push(newPost);
 
     localStorage.setItem("newPosts", JSON.stringify(newPosts));
+
+    navigate("/");
   };
 
   return (
