@@ -23,15 +23,7 @@ const Post = ({ post, fullPage }) => {
           <div className={styles["profile-name"]}>{profileName}</div>
         </div>
 
-        <img
-          className={styles["post-image"]}
-          src={
-            !post.imageUrl.startsWith("https")
-              ? URL.createObjectURL(post.image)
-              : imageUrl
-          }
-          alt={title}
-        />
+        <img className={styles["post-image"]} src={imageUrl} alt={title} />
       </LinkToPage>
       <div className={styles["post-title"]}>
         <LinkToPage>

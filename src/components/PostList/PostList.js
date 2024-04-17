@@ -4,7 +4,9 @@ import { useSearchParams } from "react-router-dom";
 import Post from "../Post/Post";
 
 const PostList = () => {
-  const [posts, setposts] = useState([]);
+  const [posts, setposts] = useState(
+    JSON.parse(localStorage.getItem("posts")) ?? []
+  );
   const [page, setPage] = useState(1);
   const [loadIsFinished, setloadIsFinished] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -35,14 +37,19 @@ const PostList = () => {
       }
     }
 
+    const result = reload ? newPosts : [...posts, ...newPosts];
+    let finalResult = result;
+
     if (!newPosts || newPosts.length <= 0) {
       setloadIsFinished(true);
+      finalResult = [
+        ...result,
+        ...(JSON.parse(localStorage.getItem("newPosts")) ?? []),
+      ];
     }
 
-    const result = reload ? newPosts : [...posts, ...newPosts];
-
     setTimeout(() => {
-      setposts(result);
+      setposts(finalResult);
     }, 2);
   };
 

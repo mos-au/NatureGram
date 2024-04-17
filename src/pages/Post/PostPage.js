@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 const PostPage = () => {
   const [post, setPost] = useState(null);
+  const [hasError, setHasError] = useState(false);
   const { postId } = useParams();
 
   useEffect(() => {
@@ -12,31 +13,44 @@ const PostPage = () => {
 
   const getPost = async () => {
     const postIdParam = postId ?? "";
-    const response = await fetch(
-      `https://json-server-vercel-rust-nine.vercel.app/api/posts/${postIdParam}`
-    );
-    const post = await response.json();
 
-    if (!post.imageUrl.startsWith("https")) {
-      const res = await fetch(
-        `https://json-server-vercel-rust-nine.vercel.app/api/files/${post.imageUrl}`
+    let post;
+    try {
+      const response = await fetch(
+        `https://json-server-vercel-rust-nine.vercel.app/api/posts/${postIdParam}`
       );
-      const data = await res.blob();
-      post.image = data;
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error("Has Error");
+      }
+      post = result;
+      setHasError(false);
+    } catch (e) {
+      post = JSON.parse(localStorage.getItem("newPosts")).find(
+        (post) => post.id === postIdParam
+      );
     }
-
     setPost(post);
+    // if (!post.imageUrl.startsWith("https")) {
+    //   const res = await fetch(
+    //     `https://json-server-vercel-rust-nine.vercel.app/api/files/${post.imageUrl}`
+    //   );
+    //   const data = await res.blob();
+    //   post.image = data;
+    // }
   };
 
   if (!post) {
     return <div>Loading....</div>;
   }
 
-  return (
-    <div className="container">
-      <Post post={post} fullPage={true} />
-    </div>
-  );
+  if (!hasError) {
+    return (
+      <div className="container">
+        <Post post={post} fullPage={true} />
+      </div>
+    );
+  }
 };
 
 export default PostPage;

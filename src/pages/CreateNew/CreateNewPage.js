@@ -11,6 +11,47 @@ const CreateNewPage = () => {
   const [hasError, setHasError] = useState(false);
   const navigate = useNavigate();
 
+  // const handleCreateNew = async (e) => {
+  //   e.preventDefault();
+  //   if (!title || !description || !author) {
+  //     setHasError(true);
+  //     return;
+  //   }
+  //   setHasError(false);
+
+  //   const formData = new FormData();
+  //   formData.append("image", file);
+
+  //   try {
+  //     // const res = await fetch(
+  //     //   "https://json-server-vercel-rust-nine.vercel.app/api/upload",
+  //     //   {
+  //     //     method: "POST",
+  //     //     body: formData,
+  //     //   }
+  //     // );
+  //     // const image = await res.json();
+
+  //     const newPost = {
+  //       profileName: author,
+  //       title,
+  //       description,
+  //       profileImage: "https://avatars.githubusercontent.com/u/51633191",
+  //       isLiked,
+  //       likes: Math.floor(Math.random() * 9991),
+  //     };
+
+  //     await fetch("https://json-server-vercel-rust-nine.vercel.app/api/posts", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(newPost),
+  //     });
+  //     navigate("/");
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
   const handleCreateNew = async (e) => {
     e.preventDefault();
     if (!title || !description || !author) {
@@ -18,38 +59,21 @@ const CreateNewPage = () => {
       return;
     }
     setHasError(false);
+    const newPosts = JSON.parse(localStorage.getItem("newPosts")) ?? [];
 
-    const formData = new FormData();
-    formData.append("image", file);
+    const newPost = {
+      id: String(Math.floor(Math.random() * 9999)),
+      profileName: author,
+      title,
+      description,
+      profileImage: "https://avatars.githubusercontent.com/u/51633191",
+      imageUrl: "https://loremflickr.com/640/480/nature?lock=2043061259468800",
+      isLiked,
+      likes: Math.floor(Math.random() * 99),
+    };
+    newPosts.push(newPost);
 
-    try {
-      // const res = await fetch(
-      //   "https://json-server-vercel-rust-nine.vercel.app/api/upload",
-      //   {
-      //     method: "POST",
-      //     body: formData,
-      //   }
-      // );
-      // const image = await res.json();
-
-      const newPost = {
-        profileName: author,
-        title,
-        description,
-        profileImage: "https://avatars.githubusercontent.com/u/51633191",
-        isLiked,
-        likes: Math.floor(Math.random() * 9991),
-      };
-
-      await fetch("https://json-server-vercel-rust-nine.vercel.app/api/posts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPost),
-      });
-      navigate("/");
-    } catch (e) {
-      console.log(e);
-    }
+    localStorage.setItem("newPosts", JSON.stringify(newPosts));
   };
 
   return (
@@ -79,7 +103,7 @@ const CreateNewPage = () => {
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
-        <div>
+        {/* <div>
           <label>
             Image
             <input
@@ -88,7 +112,7 @@ const CreateNewPage = () => {
               onChange={(e) => setFile(e.target.files[0])}
             />
           </label>
-        </div>
+        </div> */}
         <label>
           Is Liked?
           <input
